@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
+    <link href="../fontawesome/css/all.css" rel="stylesheet">
     <title>My Meme Generator</title>
 </head>
 
@@ -14,10 +15,15 @@
 
     <div class="canvas-container">
         <canvas id="myCanvas" height="500" width="500"></canvas>
-
+        
         <div class="meme-generator-optins">
-            <input type="text" class="meme-txt" name="" id="" onkeydown="onTxtToAdd(event)"
-                placeholder="Enter your text here">
+            <input type="text" class="meme-txt" name="" id="" oninput="onTxtToAdd(this.value)" placeholder="Enter your text here">
+            <button class="increase-font-size-btn"><img src="https://img.icons8.com/office/16/000000/increase-font.png" onclick="onChangeFontSize(2)"/></button>
+            <button class="decrease-font-size-btn"><img src="https://img.icons8.com/office/16/000000/decrease-font.png" onclick="onChangeFontSize(-2)"/></button>
+            <button class="text-up-btn" onclick="onChangeTxtPos(-5)"><i class="fas fa-arrow-up"></i></button> <!-- bigger Y is down -->
+            <button class="text-down-btn" onclick="onChangeTxtPos(5)"><i class="fas fa-arrow-down"></i></i></button>
+            <button class="new-line-btn" onclick="onAddLine()">Add line</i></i></button>
+            <button class="back-to-gallery-btn" onclick="onBackToGallery()">Back to gallery</button>
         </div>
     </div>
 
