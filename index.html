@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
     <title>My Meme Generator</title>
 </head>
-<body>
-    
+
+<body onload="init()">
+
+    <div class="gallery"></div>
+
+    <div class="canvas-container">
+        <canvas id="myCanvas" height="500" width="500"></canvas>
+
+        <div class="meme-generator-optins">
+            <input type="text" class="meme-txt" name="" id="" onkeydown="onTxtToAdd(event)"
+                placeholder="Enter your text here">
+        </div>
+    </div>
 
 
+    <script src="js/meme-gen-storage.js"></script>
     <script src="js/meme-gen-service.js"></script>
     <script src="js/meme-gen-controller.js"></script>
 </body>
+
 </html>
