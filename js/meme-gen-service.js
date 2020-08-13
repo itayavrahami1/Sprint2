@@ -86,11 +86,12 @@ function creatMeme(imgId) {
         lines: [
             {
                 txt: 'Your Text',
-                size: 20,
+                size: 30,
                 align: 'left',
                 'fill-color': 'white',
-                'strok-color': 'red',
-                coord: { x: 200, y: 40 }
+                'strok-color': 'black',
+                coord: { x: 200, y: 40 },
+                isClicked: false
             }
         ]
     }
@@ -123,15 +124,15 @@ function createLine() {
     gMeme.selectedLineIdx++;
     var line = {
         txt: 'Your Text',
-        size: 20,
+        size: 30,
         align: 'left',
         'fill-color': 'white',
-        'strok-color': 'red',
-        coord: { x: 200, y: 440 }
+        'strok-color': 'black',
+        coord: { x: 200, y: 440 },
+        isClicked: false
     }
 
     gMeme.lines.push(line);
-    console.log(gMeme);
 }
 
 function changePage(diff) {
@@ -152,3 +153,17 @@ function changePage(diff) {
 
 }
 
+function removeLine(){
+    gMeme['lines'].splice(gMeme.selectedLineIdx,1);
+}
+
+function checkIfLine(ev){
+    // console.log(ev);
+    var clickX = ev.offsetX;
+    var clickY = ev.offsetY;
+    console.log('x:', clickX, 'y:', clickY);
+    var isLine = gMeme['lines'].find(line => {
+        return clickX > line['coord'].x && clickX < (line['coord'].x + line['txt'])
+    })
+
+}

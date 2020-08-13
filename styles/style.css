@@ -167,7 +167,7 @@ html {
     margin-inline-end: 20px;
 }
 
-.pesonal-info {
+.personal-info {
     margin-inline-start: 20px;
 }
 
@@ -247,3 +247,78 @@ html {
 .clean-link{
     text-decoration: none;
 }
+
+/*---- Media Queries ---------*/
+
+@media(max-width: 740px){
+
+    /* NAVBAR */
+
+    /* .main-nav {
+        flex-direction: column;
+    } */
+
+    .logo {
+        margin-inline-start: 10px;
+    }
+
+    .nav-list{
+        visibility: hidden;
+    }
+    .mobile-menu{
+        visibility: visible;
+        background-color: #ff7f00;
+        transform: translateY(-210%);
+    }
+
+    .mobile-menu-btn {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-size: 1.5rem;
+    }
+
+    .mobile-menu li {
+        margin-inline-start: 30px;
+        margin-block-end: 10px;
+    }
+
+    .mobile-menu a {
+        color: #ffffff;
+    }
+
+    .mobile-menu a:hover {
+        color: black;
+    }
+
+    body.menu-open .mobile-menu{
+        transform: translateY(0);
+        transition: transform .6s;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        top: 15px;
+    }
+
+    .searc-input{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .personal-sec {
+        flex-direction: column;
+    }
+
+    .personal-info{
+        margin: 0 auto;
+    }
+
+
+
+
+
+}
+

@@ -26,7 +26,6 @@ canvas {
     margin-inline-start: 10px;
     background-color: white;
     border-radius: 12px;
-
 }
 
 .meme-txt {
@@ -39,6 +38,16 @@ canvas {
     margin-bottom: 40px;
 }
 
+.line-btns{
+    margin-bottom: 40px;
+}
+
+.line-btns button{
+    font-size: 2.5rem;
+    height: 60px;
+    width: 60px;
+}
+
 .increase-txt-img, .decrease-txt-img{
     height: 60px;
     width: 60px;
@@ -46,10 +55,14 @@ canvas {
 }
 
 .txt-btns button{
-    height: 60px;
-    width: 60px;
+    height: 65px;
+    width: 65px;
     padding: 0px;
     margin-bottom: 10px;
+}
+
+.txt-btns button{
+    font-size: 2.5rem;
 }
 
 .main-footer-meme {
