@@ -4,28 +4,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/canvas-style.css">
     <link rel="stylesheet" href="styles/style.css">
-    <link href="../fontawesome/css/all.css" rel="stylesheet">
+    <link href="Fonts/fontawesome/css/all.css" rel="stylesheet">
     <title>My Meme Generator</title>
 </head>
 
 <body onload="init()">
 
-    <div class="gallery"></div>
+    <nav class="main-nav container flex space-between align-center">
+        <div class="logo"><img src="DESIGN/LOGO/LOGO.png" alt=""></div>
+        <!-- <div class="logo">Memegen</div> -->
+        <ul class="nav-list clean-list flex">
+            <li class="nav-galley-li flex"><a class="nav-gallery-link flex clean-link align-center" href="#">Gallery</a>
+            </li>
+            <li class="nav-seperator flex align-center">|</li>
+            <li class="nav-about flex"><a class="clean-link flex align-center" href="#">About</a></li>
+        </ul>
+    </nav>
 
-    <div class="canvas-container">
-        <canvas id="myCanvas" height="500" width="500"></canvas>
-        
-        <div class="meme-generator-optins">
-            <input type="text" class="meme-txt" name="" id="" oninput="onTxtToAdd(this.value)" placeholder="Enter your text here">
-            <button class="increase-font-size-btn"><img src="https://img.icons8.com/office/16/000000/increase-font.png" onclick="onChangeFontSize(2)"/></button>
-            <button class="decrease-font-size-btn"><img src="https://img.icons8.com/office/16/000000/decrease-font.png" onclick="onChangeFontSize(-2)"/></button>
-            <button class="text-up-btn" onclick="onChangeTxtPos(-5)"><i class="fas fa-arrow-up"></i></button> <!-- bigger Y is down -->
-            <button class="text-down-btn" onclick="onChangeTxtPos(5)"><i class="fas fa-arrow-down"></i></i></button>
-            <button class="new-line-btn" onclick="onAddLine()">Add line</i></i></button>
-            <button class="back-to-gallery-btn" onclick="onBackToGallery()">Back to gallery</button>
+    <section class="search-bar container flex space-between align-center">
+        <input type="text" class="searc-input" placeholder="Enter search keyword    🔍">
+        <ul class="frequent-search clean-list flex">
+            <li>Word</li>
+            <li>Word</li>
+            <li>Word</li>
+            <li>Word</li>
+            <li class="more-keyword">More...</li>
+        </ul>
+    </section>
+
+    <div class="main-gallery container">
+        <div class="gallery container grid-container"></div>
+        <div class="page-scroller container flex space-between">
+            <button class="page-prev-scroll-btn" onclick="onPageScrollBtn(-1)">←</button>
+            <button class="page-next-scroll-btn" onclick="onPageScrollBtn(1)">→</button>
         </div>
+
     </div>
+    
+    <div class="canvas-container flex-colunm">
+
+        <nav class="main-nav flex space-between align-center">
+            <div class="logo"><img src="DESIGN/LOGO/LOGO.png" alt=""></div>
+            <!-- <div class="logo">Memegen</div> -->
+            <ul class="nav-list clean-list flex">
+                <li class="nav-galley-li flex"><a class="nav-gallery-link flex clean-link align-center"
+                        href="#">Gallery</a></li>
+                <li class="nav-seperator flex align-center">|</li>
+                <li class="nav-about flex"><a class="clean-link flex align-center" href="#">About</a></li>
+            </ul>
+        </nav>
+
+        <sec class="meme-sec flex">
+            <canvas id="myCanvas" height="550" width="550"></canvas>
+            <!-- <img src="" alt=""> -->
+            <div class="meme-generator-options flex-colunm align-center">
+                <input type="text" class="meme-txt" name="" id="" oninput="onTxtToAdd(this.value)"
+                    placeholder="Enter your text here">
+
+                <div class="line-btns flex center-content">
+                    <button class="text-up-btn" onclick="onChangeTxtPos(-5)"><i class="fas fa-arrow-up"></i></button>
+                    <!-- bigger Y is down -->
+                    <button class="text-down-btn" onclick="onChangeTxtPos(5)"><i class="fas fa-arrow-down"></i></i></button>
+                    <button class="new-line-btn" onclick="onAddLine()">Add line</i></i></button>
+                </div>
+
+                <div class="txt-btns flex">
+                    <button class="increase-font-size-btn"><img class="increase-txt-img" src="DESIGN/Meme1-Sergei/ICONS/increase_font.png"
+                            onclick="onChangeFontSize(2)" /></button>
+                    <button class="decrease-font-size-btn"><img class="decrease-txt-img" src="DESIGN/Meme1-Sergei/ICONS/decrease_font.png"
+                            onclick="onChangeFontSize(-2)" /></button>
+                </div>
+                <button class="back-to-gallery-btn" onclick="onBackToGallery()">Back to gallery</button>
+            </div>
+        </sec>
+
+        <footer class="main-footer-meme flex-colunm center-content align-center">
+            <div class="footer-logo"><img src="DESIGN/LOGO/LOGO.png" alt=""></div>
+            <h3>All rights reserved 2019</h3>
+        </footer>
+
+    </div>
+
+    <section class="personal-sec flex contanier align-center center-content">
+        <img class="per-img" src="img/alina-kovalchuk.png" alt="personal-img">
+        <div class="pesonal-info">
+            <h2 class="name-header">Monica Geller</h2>
+            <p class="personal-info">is a fictional character, one of the six main characters who appears on the
+                American sitcom Friends (1994–2004).
+                Created by David Crane and Marta Kauffman</p>
+            <nav class="social-container flex">
+                <button class="social-facebook flex align-center center-content"><i
+                        class="fab fa-facebook-f"></i></button>
+                <button class="social-twitter flex align-center center-content"><i
+                        class="fab fa-linkedin-in"></i></button>
+                <button class="social-behance flex align-center center-content"><i class="fab fa-github"></i></button>
+            </nav>
+        </div>
+    </section>
+
+    <footer class="main-footer flex-colunm center-content align-center">
+        <div class="footer-logo"><img src="DESIGN/LOGO/LOGO.png" alt=""></div>
+        <h3>All rights reserved 2019</h3>
+    </footer>
 
 
     <script src="js/meme-gen-storage.js"></script>

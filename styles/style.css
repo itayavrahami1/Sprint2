@@ -2,41 +2,203 @@
     box-sizing: border-box;
 }
 
+/* FONTS */
+
 @font-face {
     font-family: Impact;
-    src: url(/Fonts/impact.ttf);
+    src: url(../Fonts/impact.ttf);
+}
+
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url(../Fonts/Montserrat-Regular.ttf);
+}
+
+@font-face {
+    font-family: Montserrat-Bold;
+    src: url(../Fonts/Montserrat-Regular.ttf);
+}
+
+@font-face {
+    font-family: Montserrat-Thin;
+    src: url(../Fonts/Montserrat-Thin.ttf);
 }
 
 /* BASE */
 
 html {
-    font-family: Impact;
+    font-family: Montserrat-Regular;
 }
 
-canvas {
-    display: block;
-    margin: 0 auto;
-    border: 1px solid black;
+/* LAYOUT */
+
+.container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1.2rem;
 }
 
-.canvas-container{
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: aquamarine;
-    margin: 0 auto;
-    width: 100%;
+.grid-container{
+    display: grid;
+    /* max-width: 1200px; */
+    min-height: 65vh;
+    padding: 15px;
+    background-color: #e3e3e3;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 25px 25px;
+}
+
+.gallery *{
+    width:100%;
     height: 100%;
-    border: 1px solid red;
-    visibility: hidden;
-    order: 1;
 }
+
+/* COMPONENTS */
+
+/* MAIN NAVBAR */
+
+.main-nav {
+    height: 66px;
+    background-color: #ff7f00;
+    font-family: Montserrat-Regular;
+    font-size: 1.1875rem;
+    color: #ffffff;
+}
+
+.logo {
+    width: 133px;
+    margin-inline-start: 50px;
+    margin-top: 5px;
+}
+
+.main-nav li {
+    height: 66px;
+}
+
+.main-nav a {
+    color: #ffffff;
+}
+
+.nav-seperator{
+    color: green;
+    font-size: 2rem;
+    margin: 0 10px;
+}
+
+.main-nav li:hover{
+    border-bottom: 3px black solid;
+}
+
+.main-nav li:last-child{
+    margin-inline-end: 10px;
+}
+
+.main-nav li:hover a{
+    color: #040a2c;
+}
+
+/* SEARCH NAVBAR */
+
+.search-bar {
+    height: 103px;
+    background-color: #ffffff;
+}
+
+.searc-input {
+    border: none;
+    border-bottom: 1px black solid;
+    font-weight: 500;
+    font-size: 1.1875rem;
+}
+.searc-input:focus {
+    outline: none;
+}
+
+.search-bar li {
+    text-transform: lowercase;
+}
+
+.search-bar li:not(:first-child) {
+    margin-inline-start: 40px;
+}
+
+/* GALLERY */
+
+.page-scroller {
+    margin-bottom: 15px;
+    background-color: #e3e3e3;
+    padding: 10px;
+}
+
+.page-prev-scroll-btn {
+    visibility: hidden;
+}
+
+.main-gallery button{
+    background-color: #e3e3e3;
+}
+
+.main-gallery button{
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0 10px;
+    border-radius: 50px;
+}
+
+.main-gallery button:hover{
+    cursor: pointer;
+    background-color: indianred;
+    transition: 0.3s;
+}
+
+/* PERSONAL SECTION */
+
+.personal-sec {
+    max-height: 930px;
+    background-color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.per-img {
+    height: 200px;
+    width: 200px;
+    margin-inline-end: 20px;
+}
+
+.pesonal-info {
+    margin-inline-start: 20px;
+}
+
+.social-container button{
+    height: 40px;
+    width: 40px;
+    background-color: #ff7f00;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.3rem;
+    border: none;
+}
+.social-container button:not(:first-child){
+    margin-inline-start: 15px;
+}
+
+/* FOOTER */
+
+.main-footer, .main-footer-meme {
+    height: 200px;
+    background-color: #ff7f00;
+}
+
+.main-footer h3, .main-footer-meme h3 {
+    font-weight: 100;
+    font-size: 1.1875rem;
+    color: white;
+}
+
 
 /* HELPERS */
-
-.grid {
-    display: grid;
-}
 
 .shown{
     visibility: visible;
@@ -44,4 +206,44 @@ canvas {
 
 .hide {
     visibility: hidden;
+}
+
+
+/* flex helpers */
+
+.flex {
+    display: flex;
+}
+
+.flex-colunm {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid {
+    display: grid;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.center-content {
+    justify-content: center;
+}
+
+/* list-helpers */
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.clean-link{
+    text-decoration: none;
 }

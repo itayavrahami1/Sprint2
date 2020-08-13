@@ -18,8 +18,14 @@ function renderGallery() {
 
 function onImgClick(imgId) {
     // shownig the canvas and hiding the gallery    
-    document.querySelector('.canvas-container').classList.add('shown')
-    document.querySelector('.gallery').classList.add('hidden');
+    document.querySelector('.canvas-container').classList.add('shown');
+    document.querySelector('.main-footer-meme').classList.add('shown');
+    document.querySelector('.gallery').classList.add('hide');
+    document.querySelector('.main-nav').classList.add('hide');
+    document.querySelector('.search-bar').classList.add('hide');
+    document.querySelector('.page-scroller').classList.add('hide');
+    document.querySelector('.personal-sec').classList.add('hide');
+    document.querySelector('.main-footer').classList.add('hide');
 
     gCurrImg = getImgById(imgId);
     getMeme(imgId);
@@ -28,11 +34,18 @@ function onImgClick(imgId) {
 }
 
 function onBackToGallery() {
-    document.querySelector('.canvas-container').classList.remove('shown')
-    document.querySelector('.gallery').classList.remove('hidden');
+    document.querySelector('.canvas-container').classList.remove('shown');
+    document.querySelector('.main-footer-meme').classList.remove('shown');
+    document.querySelector('.gallery').classList.remove('hide');
+    document.querySelector('.main-nav').classList.remove('hide');
+    document.querySelector('.search-bar').classList.remove('hide');
+    document.querySelector('.page-scroller').classList.remove('hide');
+    document.querySelector('.personal-sec').classList.remove('hide');
+    document.querySelector('.main-footer').classList.remove('hide');
 }
 
 async function drawImg(imgUrl, func) {
+
     const img = new Image();
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
@@ -81,6 +94,29 @@ function onAddLine() {
     document.querySelector('.meme-txt').value = ''; // clear the input place holder
     createLine()
     drawImg(gCurrImg.url, drawText);
+}
+
+// PAGE SCROLLER
+
+function onPageScrollBtn(diff) {
+    var scrollBtnToDisp = changePage(diff)
+    renderGallery();
+
+    // show\hide to scroll btn if first\last page
+    if (!scrollBtnToDisp.prev) {
+        document.querySelector('.page-prev-scroll-btn').classList.remove('shown');
+        document.querySelector('.page-prev-scroll-btn').classList.add('hide');
+    } else {
+        document.querySelector('.page-prev-scroll-btn').classList.remove('hide');
+        document.querySelector('.page-prev-scroll-btn').classList.add('shown');
+    }
+    if (!scrollBtnToDisp.next) {
+        document.querySelector('.page-next-scroll-btn').classList.add('hide');
+        document.querySelector('.page-next-scroll-btn').classList.remove('shown');
+    } else {
+        document.querySelector('.page-next-scroll-btn').classList.add('shown');
+        document.querySelector('.page-next-scroll-btn').classList.remove('hide');
+    }
 }
 
 

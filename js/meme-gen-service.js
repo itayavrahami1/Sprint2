@@ -6,6 +6,8 @@ var gKeywords;
 var gId = 1;
 var gMeme;
 var gCurrImg;
+var gPageSize = 9; // might change with responsivity
+var gPageIdx = 0;
 
 
 var defaultImgs = [
@@ -33,15 +35,34 @@ var defaultImgs = [
         url: 'img/meme-imgs (square)/6.jpg',
         keywords: ['man, explanation, satisfied']
     },
-    
+    {
+        url: 'img/meme-imgs (square)/7.jpg',
+        keywords: ['baby, eyes, surprised']
+    },
+    {
+        url: 'img/meme-imgs (square)/8.jpg',
+        keywords: ['man, magician, interesting']
+    },
+    {
+        url: 'img/meme-imgs (square)/9.jpg',
+        keywords: ['baby, laugh, nature']
+    },
+    {
+        url: 'img/meme-imgs (square)/10.jpg',
+        keywords: ['obama, laugh']
+    },
+    {
+        url: 'img/meme-imgs (square)/11.jpg',
+        keywords: ['fight, romance, nba']
+    },
+
 ]
 
 gImgs = createImgs(defaultImgs);
 
-
-
 function getImgs() {
-    return gImgs;
+    var startIdx = gPageSize * gPageIdx;
+    return gImgs.slice(startIdx, startIdx + gPageSize);
 }
 function getMeme(imgId) {
     var meme = creatMeme(imgId);
@@ -111,5 +132,23 @@ function createLine() {
 
     gMeme.lines.push(line);
     console.log(gMeme);
+}
+
+function changePage(diff) {
+    var scrollBtnToDisp = {}; // if is the first\last page won't show the prev\next btn
+    var pageCount = Math.ceil(gImgs.length / gPageSize - 1);
+    var newPageIdx = gPageIdx + diff;
+    gPageIdx = newPageIdx;
+    if (newPageIdx > 0 && newPageIdx < pageCount) {
+        scrollBtnToDisp = { prev: true, next: true };
+        return scrollBtnToDisp;
+    } else if (newPageIdx === 0){
+        scrollBtnToDisp = { prev: false, next: true };
+        return scrollBtnToDisp;
+    } else if (newPageIdx === pageCount){
+        scrollBtnToDisp = { prev: true, next: false };
+        return scrollBtnToDisp;
+    }
+
 }
 
