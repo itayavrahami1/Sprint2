@@ -12,25 +12,18 @@
 
 <body onload="init()">
 
+    <div class="screen" onclick="toggleMenu()"></div>
+
     <nav class="main-nav container flex space-between align-center">
         <div class="logo"><img src="DESIGN/LOGO/LOGO.png" alt=""></div>
-        <!-- <div class="logo">Memegen</div> -->
         <ul class="nav-list clean-list flex">
             <li class="nav-gallery-li flex"><a class="nav-gallery-link flex clean-link align-center" href="#">Gallery</a>
             </li>
-            <li class="nav-seperator flex align-center">|</li>
             <li class="nav-about flex"><a class="clean-link flex align-center" href="#">About</a></li>
         </ul>
 
-        
-        <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
     </nav>
-    
-    <ul class="mobile-menu clean-list flex-colunm container">
-        <li class="nav-galley-li flex"><a class="nav-gallery-link flex clean-link align-center" href="#">Gallery</a>
-        </li>
-        <li class="nav-about flex"><a class="clean-link flex align-center" href="#">About</a></li>
-    </ul>
 
     <section class="search-bar container flex space-between align-center">
         <input type="text" class="searc-input" placeholder="Enter search keyword    🔍">
@@ -54,19 +47,29 @@
     
     <div class="canvas-container flex-colunm">
 
-        <nav class="main-nav flex space-between align-center">
+        <!-- <nav class="main-nav flex space-between align-center">
             <div class="logo"><img src="DESIGN/LOGO/LOGO.png" alt=""></div>
-            <!-- <div class="logo">Memegen</div> -->
             <ul class="nav-list clean-list flex">
                 <li class="nav-galley-li flex"><a class="nav-gallery-link flex clean-link align-center"
                         href="#">Gallery</a></li>
                 <li class="nav-seperator flex align-center">|</li>
                 <li class="nav-about flex"><a class="clean-link flex align-center" href="#">About</a></li>
             </ul>
+        </nav> -->
+        <div class="meme-screen" onclick="toggleMenu()"></div>
+        <nav class="meme-main-nav container flex space-between align-center">
+            <div class="logo"><img src="DESIGN/LOGO/LOGO.png" alt=""></div>
+            <ul class="nav-list clean-list flex">
+                <li class="nav-gallery-li flex"><a class="nav-gallery-link flex clean-link align-center" href="#">Gallery</a>
+                </li>
+                <li class="nav-about flex"><a class="clean-link flex align-center" href="#">About</a></li>
+            </ul>
+    
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
         </nav>
 
         <sec class="meme-sec flex">
-            <canvas id="myCanvas" height="550" width="550" onclick="canvasClicked(event)"></canvas>
+            <canvas id="myCanvas" height="500" width="500" onclick="canvasClicked(event)" onmousedown="canvasClicked(event)" onmousemove="onMoveText(event)"></canvas>
             <!-- <img src="" alt=""> -->
             <div class="meme-generator-options flex-colunm align-center">
                 <input type="text" class="meme-txt" name="" id="" oninput="onTxtToAdd(this.value)"
@@ -85,9 +88,9 @@
                             onclick="onChangeFontSize(2)" /></button>
                     <button class="decrease-font-size-btn"><img class="decrease-txt-img" src="DESIGN/Meme1-Sergei/ICONS/decrease_font.png"
                             onclick="onChangeFontSize(-2)" /></button>
-                    <button class="align-txt-left-btn"><i class="fas fa-align-left"></i></button>
-                    <button class="align-txt-center-btn"><i class="fas fa-align-center"></i></button>
-                    <button class="align-txt-right-btn"><i class="fas fa-align-right"></i></button>
+                    <button class="align-txt-left-btn" onclick="onAlignTxt('right')"><i class="fas fa-align-left"></i></button>
+                    <button class="align-txt-center-btn" onclick="onAlignTxt('center')"><i class="fas fa-align-center"></i></button>
+                    <button class="align-txt-right-btn" onclick="onAlignTxt('left')"><i class="fas fa-align-right"></i></button>
                 </div>
                 <button class="back-to-gallery-btn" onclick="onBackToGallery()">Back to gallery</button>
             </div>

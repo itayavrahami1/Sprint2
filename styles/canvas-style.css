@@ -8,6 +8,7 @@
     height: 100%;
     visibility: hidden;
     order: 1;
+    overflow: scroll;
 }
 
 canvas {
@@ -71,4 +72,37 @@ canvas {
 }
 .main-footer-meme h3{
     margin: 0px;
+}
+
+/* MEDIA QUERIES */
+
+@media(max-width: 740px){
+    canvas {
+        margin: 28px auto 0px;
+    }
+
+    .meme-generator-options {
+        width: 100%;
+        margin: 10px;
+    }
+
+    .meme-generator-options button {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .line-btns {
+        margin-bottom: 15px;
+    }
+
+    .meme-generator-options img {
+        width: 25px;
+        height: 25px;
+        padding: 3px;
+    }
+
+    .meme-txt, .back-to-gallery-btn{
+        min-width: 30%;
+    }
 }
