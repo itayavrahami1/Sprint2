@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/canvas-style.css">
+    <link rel="stylesheet" href="styles/edit-meme-style.css">
     <link rel="stylesheet" href="styles/style.css">
     <link href="Fonts/fontawesome/css/all.css" rel="stylesheet">
     <title>My Meme Generator</title>
@@ -46,18 +46,8 @@
     </div>
     
     <div class="canvas-container flex-colunm">
-
-        <!-- <nav class="main-nav flex space-between align-center">
-            <div class="logo"><img src="DESIGN/LOGO/LOGO.png" alt=""></div>
-            <ul class="nav-list clean-list flex">
-                <li class="nav-galley-li flex"><a class="nav-gallery-link flex clean-link align-center"
-                        href="#">Gallery</a></li>
-                <li class="nav-seperator flex align-center">|</li>
-                <li class="nav-about flex"><a class="clean-link flex align-center" href="#">About</a></li>
-            </ul>
-        </nav> -->
         <div class="meme-screen" onclick="toggleMenu()"></div>
-        <nav class="meme-main-nav container flex space-between align-center">
+        <nav class="meme-main-nav flex space-between align-center">
             <div class="logo"><img src="DESIGN/LOGO/LOGO.png" alt=""></div>
             <ul class="nav-list clean-list flex">
                 <li class="nav-gallery-li flex"><a class="nav-gallery-link flex clean-link align-center" href="#">Gallery</a>
@@ -69,7 +59,8 @@
         </nav>
 
         <sec class="meme-sec flex">
-            <canvas id="myCanvas" height="500" width="500" onclick="canvasClicked(event)" onmousedown="canvasClicked(event)" onmousemove="onMoveText(event)"></canvas>
+            <canvas id="myCanvas" height="500" width="500" onclick="canvasClicked(event)" onmouseup="onMouseUpCanvas(event)" 
+                                                onmousedown="canvasClicked(event)" onmousemove="onMoveText(event)"></canvas>
             <!-- <img src="" alt=""> -->
             <div class="meme-generator-options flex-colunm align-center">
                 <input type="text" class="meme-txt" name="" id="" oninput="onTxtToAdd(this.value)"
@@ -78,9 +69,10 @@
                 <div class="line-btns flex center-content">
                     <button class="text-up-btn" onclick="onChangeTxtPos(-5)"><i class="fas fa-arrow-up"></i></button>
                     <!-- bigger Y is down -->
-                    <button class="text-down-btn" onclick="onChangeTxtPos(5)"><i class="fas fa-arrow-down"></i></i></button>
+                    <button class="text-down-btn" onclick="onChangeTxtPos(5)"><i class="fas fa-arrow-down"></i></button>
+                    <button class="switch-line-btn" onclick="onChangeLine()"><i class="fas fa-sync-alt"></i></button>
                     <button class="new-line-btn" onclick="onAddLine()"><i class="fas fa-plus"></i></button>
-                    <button class="new-line-btn" onclick="onRemoveLine()"><i class="far fa-trash-alt"></i></button>
+                    <button class="remove-line-btn" onclick="onRemoveLine()"><i class="far fa-trash-alt"></i></button>
                 </div>
 
                 <div class="txt-btns flex">
@@ -91,6 +83,18 @@
                     <button class="align-txt-left-btn" onclick="onAlignTxt('right')"><i class="fas fa-align-left"></i></button>
                     <button class="align-txt-center-btn" onclick="onAlignTxt('center')"><i class="fas fa-align-center"></i></button>
                     <button class="align-txt-right-btn" onclick="onAlignTxt('left')"><i class="fas fa-align-right"></i></button>
+                </div>
+
+                <div class="txt-more-btns flex space-between container">
+                    <select name="" id="" class="font-select">
+                        <option value="Impact">Impact</option>
+                        <option value="Montserrat">Montserrat</option>
+                    </select>
+                    <span class="fill-color-span">
+                        <input type="color" id="color-picker" name="color" value="#ff0000"/>
+                        <button class="change-fill-color" data-colorProperty="fill" onclick="onPickColorBtn(this)"><i class="fas fa-comment"></i></button>
+                        <button class="change-stroke-color" data-colorProperty="stroke" onclick="onPickColorBtn(this)"><i class="far fa-comment"></i></button>
+                    </span>
                 </div>
                 <button class="back-to-gallery-btn" onclick="onBackToGallery()">Back to gallery</button>
             </div>

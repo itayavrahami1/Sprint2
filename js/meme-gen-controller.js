@@ -4,13 +4,15 @@ var gCanvas = document.getElementById('myCanvas');
 var gCtx = gCanvas.getContext('2d');
 var isOpen = false;
 var isMemeEdit = false;
+var gColorPropToChange; //fill or stroke
 
 function init() {
     renderGallery();
-    initCanvasSize();
+    // initKeywords();
     window.addEventListener('resize', function () {
         _resizeCanvas()
     })
+    document.querySelector('#color-picker').addEventListener("change", changeColor, false);
 }
 
 function renderGallery() {
@@ -24,6 +26,7 @@ function renderGallery() {
 
 function onImgClick(imgId) {
     isMemeEdit = true;
+    initCanvasSize();
     // shownig the canvas and hiding the gallery    
     document.querySelector('.canvas-container').classList.add('shown');
     document.querySelector('.main-footer-meme').classList.add('shown');
@@ -62,7 +65,6 @@ function onBackToGallery() {
 }
 
 function drawImg(imgUrl, func) {
-    // clearCanvas()
     const img = new Image();
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
@@ -79,13 +81,15 @@ function drawText() {
         var text = memeLineProperties['txt'];
         var fontStr = memeLineProperties['size'] + 'px Impact';
         gCtx.lineWidth = '1';
-        gCtx.strokeStyle = memeLineProperties['strok-color'];
+        gCtx.strokeStyle = memeLineProperties['stroke-color'];
         gCtx.fillStyle = memeLineProperties['fill-color'];
         gCtx.font = fontStr;
         gCtx.textAlign = memeLineProperties['align'];
         gCtx.fillText(text, x, y);
         gCtx.strokeText(text, x, y);
         if (i === gMeme['selectedLineIdx']) {
+            gCtx.beginPath();
+            gCtx.strokeStyle = 'black';
             var rectWidth = (memeLineProperties['textRectRegion'].finX - memeLineProperties['textRectRegion'].initX);
             var rectHeight = (memeLineProperties['textRectRegion'].finY - memeLineProperties['textRectRegion'].initY);
             gCtx.strokeRect(memeLineProperties['textRectRegion'].initX, memeLineProperties['textRectRegion'].initY, rectWidth, rectHeight);
@@ -119,17 +123,19 @@ function onChangeTxtPos(diff) {
 
 function onAddLine() {
     document.querySelector('.meme-txt').value = ''; // clear the input place holder
-    if (gMeme['lines'].length === 1) {
-        createLine()
-    } else {
-        var currLine = (gMeme.selectedLineIdx === 0) ? 1 : 0;
-        gMeme.selectedLineIdx = currLine;
-    }
+    createLine()
     var rectRegion = _getTextRectRegion(gMeme);
     gMeme['lines'][gMeme.selectedLineIdx].textRectRegion = rectRegion;
     drawImg(gCurrImg.url, drawText);
 }
 
+function onChangeLine() {
+    gMeme.selectedLineIdx++;
+    if (gMeme.selectedLineIdx >= gMeme['lines'].length) { gMeme.selectedLineIdx = 0 }
+    var rectRegion = _getTextRectRegion(gMeme);
+    gMeme['lines'][gMeme.selectedLineIdx].textRectRegion = rectRegion;
+    drawImg(gCurrImg.url, drawText);
+}
 // PAGE SCROLLER
 
 function onPageScrollBtn(diff) {
@@ -161,6 +167,11 @@ function onRemoveLine() {
 function canvasClicked(ev) {
     checkIfLine(ev);
     drawImg(gCurrImg.url, drawText);
+    if (gMeme.selectedLineIdx !== -1) {
+        document.querySelector('.meme-txt').value = gMeme.lines[gMeme.selectedLineIdx].txt;
+    } else {
+        document.querySelector('.meme-txt').value = '';
+    }
 }
 
 function onMoveText(ev) {
@@ -171,6 +182,27 @@ function onMoveText(ev) {
 
 function onAlignTxt(alignTo) {
     updateLineAlign(alignTo)
+    drawImg(gCurrImg.url, drawText);
+}
+
+function onMouseUpCanvas(event) {
+    gPrevMouseMoveEv = null;
+}
+
+function onPickColorBtn(elBtn) {
+    gColorPropToChange = (elBtn.dataset.colorproperty === 'fill') ? 'fill-color' : 'stroke-color';
+    var colorPicker = document.querySelector('#color-picker'); //selecting the color picker
+    var colorToColorPicker = gMeme.lines[gMeme.selectedLineIdx][gColorPropToChange];
+    colorPicker.value = colorToColorPicker; // insert to color picker value the value-color of the relevant property - stroke\fill
+    // console.log(elBtn.style);
+    colorPicker.click();
+}
+
+function changeColor() {
+    var color = document.querySelector('#color-picker').value;
+    var elBtn = (gColorPropToChange === 'fill-color') ? document.querySelector('.change-fill-color'):document.querySelector('.change-stroke-color');
+    elBtn.style.color = color;
+    updateTextColor(gColorPropToChange, color);
     drawImg(gCurrImg.url, drawText);
 }
 
@@ -192,7 +224,6 @@ function _resizeCanvas() {
         gCanvas.height = 400;
         drawImg(gCurrImg.url, drawText);
     } else if (window.innerWidth < 550 && gCanvas.width != 300) {
-        console.log('it');
         gCanvas.width = 300;
         gCanvas.height = 300;
         drawImg(gCurrImg.url, drawText);
@@ -215,3 +246,8 @@ function initCanvasSize() {
         gCanvas.height = 300;
     }
 }
+
+// function initKeywords(){
+//     console.log(gMapKeyword);
+//     findCommonKeywords();
+// }

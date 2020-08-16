@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #e3e3e3;
+    background-color: #f1f1f1;
     margin: 0 auto;
     width: 100%;
     height: 100%;
@@ -25,46 +25,69 @@ canvas {
 .meme-generator-options button{
     margin-inline-end: 10px;
     margin-inline-start: 10px;
-    background-color: white;
+    background-color: rgb(241, 241, 241);
     border-radius: 12px;
 }
 
 .meme-txt {
     margin-bottom: 10px;
-    height: 60px;
+    max-height: 60px;
     width: 60%;
+    font-size: 2rem;
 }
 
-.line-btns{
+.meme-generator-options > *{
     margin-bottom: 40px;
 }
 
-.line-btns{
-    margin-bottom: 40px;
+.meme-generator-options  *:hover{
+    cursor: pointer;
 }
 
-.line-btns button{
+.meme-generator-options button:not(.back-to-gallery-btn){
     font-size: 2.5rem;
     height: 60px;
     width: 60px;
+    padding: 2px
 }
 
 .increase-txt-img, .decrease-txt-img{
-    height: 60px;
-    width: 60px;
+    height: 55px;
+    width: 55px;
     padding: 3px;
 }
 
-.txt-btns button{
-    height: 65px;
-    width: 65px;
-    padding: 0px;
-    margin-bottom: 10px;
+.txt-more-btns{
+    flex: 1;
 }
 
-.txt-btns button{
-    font-size: 2.5rem;
+.font-select {
+    max-height: 60px;
+    font-size: 1.5rem;
 }
+
+.back-to-gallery-btn{
+    font-size: 2rem;
+}
+
+.change-fill-color, .change-stroke-color {
+    color: tomato;
+    background-color: red;
+}
+
+.fill-color-span {
+    position: relative;
+}
+
+.fill-color-span input{
+    position: relative;
+    right: 50px;
+    top: 5px;
+    z-index: -1;
+}
+
+
+/* FOOTER */
 
 .main-footer-meme {
     max-height: 200px;
@@ -86,15 +109,17 @@ canvas {
         margin: 10px;
     }
 
-    .meme-generator-options button {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
+    .meme-generator-options button:not(.back-to-gallery-btn){
+        font-size: 1rem;
+        height: 40px;
+        width: 40px;
+        padding: 2px
     }
 
-    .line-btns {
-        margin-bottom: 15px;
+    .meme-generator-options > *{
+        margin-bottom: 10px;
     }
+
 
     .meme-generator-options img {
         width: 25px;
@@ -104,5 +129,6 @@ canvas {
 
     .meme-txt, .back-to-gallery-btn{
         min-width: 30%;
+        font-size: 1rem;
     }
 }

@@ -8,52 +8,56 @@ var gMeme;
 var gCurrImg;
 var gPageSize = 9; // might change with responsivity
 var gPageIdx = 0;
+var gSum = 0;
+var gPrevMouseMoveEv;
+var gMapKeyword;
+
 
 
 var defaultImgs = [
     {
         url: 'img/meme-imgs (square)/1.jpg',
-        keywords: ['Trump, angry, speech']
+        keywords: ['Trump', 'angry', 'speech']
     },
     {
         url: 'img/meme-imgs (square)/2.jpg',
-        keywords: ['dogs, kiss']
+        keywords: ['dogs', 'kiss']
     },
     {
         url: 'img/meme-imgs (square)/3.jpg',
-        keywords: ['baby, dog, sleep']
+        keywords: ['baby', 'dog', 'sleep']
     },
     {
         url: 'img/meme-imgs (square)/4.jpg',
-        keywords: ['cat, computer, sleep']
+        keywords: ['cat', 'computer', 'sleep']
     },
     {
         url: 'img/meme-imgs (square)/5.jpg',
-        keywords: ['baby, beach, success']
+        keywords: ['baby', 'beach', 'success']
     },
     {
         url: 'img/meme-imgs (square)/6.jpg',
-        keywords: ['man, explanation, satisfied']
+        keywords: ['man', 'explanation', 'satisfied']
     },
     {
         url: 'img/meme-imgs (square)/7.jpg',
-        keywords: ['baby, eyes, surprised']
+        keywords: ['baby', 'eyes', 'surprised']
     },
     {
         url: 'img/meme-imgs (square)/8.jpg',
-        keywords: ['man, magician, interesting']
+        keywords: ['man', 'magician', 'interesting']
     },
     {
         url: 'img/meme-imgs (square)/9.jpg',
-        keywords: ['baby, laugh, nature']
+        keywords: ['baby', 'laugh', 'nature']
     },
     {
         url: 'img/meme-imgs (square)/10.jpg',
-        keywords: ['obama, laugh']
+        keywords: ['obama', 'laugh']
     },
     {
         url: 'img/meme-imgs (square)/11.jpg',
-        keywords: ['fight, romance, nba']
+        keywords: ['fight', 'romance', 'nba']
     }
 ]
 
@@ -88,9 +92,9 @@ function creatMeme(imgId) {
                 txt: 'Your Text',
                 size: 30,
                 align: 'center',
-                'fill-color': 'white',
-                'strok-color': 'black',
-                coord: { x: 200, y: 40 },
+                'fill-color': '#ffffff',
+                'stroke-color': '#000000',
+                coord: { x: gCanvas.width / 2, y: 50 },
                 textRectRegion: null,
                 isClicked: true
             }
@@ -107,7 +111,22 @@ function createImgs(defaultImgs) {
     var imgs = defaultImgs.map(image => {
         return createImg(image)
     })
+
+
     gImgs = imgs;
+    // an array of all the keywords
+    var allKeywords = gImgs.reduce(function (acc, image) {
+        acc.push(...image['keywords']);
+        return acc;
+    }, [])
+
+    // maped array of all the keywords and their appearences
+    gMapKeyword = allKeywords.reduce(function (acc, keyword) {
+        if (!acc[keyword]) acc[keyword] = 0;
+        acc[keyword]++
+        return acc;
+    }, {})
+
     return gImgs;
 }
 
@@ -127,15 +146,16 @@ function setMemeLine(line) {
 }
 
 function createLine() {
-    gMeme.selectedLineIdx++;
+    gMeme.selectedLineIdx = gMeme['lines'].length;
+    var yCoord = (gMeme['lines'].length >= 2) ? (gCanvas.height / 2) : (gCanvas.height - 30)
     var line = {
         txt: 'Your Text',
         size: 30,
         align: 'center',
-        'fill-color': 'white',
-        'strok-color': 'black',
+        'fill-color': '#ffffff',
+        'stroke-color': '#000000',
         textRectRegion: null,
-        coord: { x: 200, y: 440 },
+        coord: { x: gCanvas.width / 2, y: yCoord},
         isClicked: true
     }
 
@@ -163,7 +183,9 @@ function changePage(diff) {
 }
 
 function removeLine() {
+    if (gMeme.selectedLineIdx === -1) return;
     gMeme['lines'].splice(gMeme.selectedLineIdx, 1);
+    gMeme.selectedLineIdx = -1;
 }
 
 function checkIfLine(ev) {
@@ -175,7 +197,7 @@ function checkIfLine(ev) {
             && line.textRectRegion.initY < clickY && line.textRectRegion.finY > clickY
     })
 
-    gMeme['lines'].forEach(line => {
+    gMeme.lines.forEach(line => {
         line.isClicked = false;
     })
 
@@ -231,11 +253,38 @@ function _getLineIdx() {
     return gMeme.selectedLineIdx;
 }
 
-function updateTextCoord(ev){
+
+function updateTextCoord(ev) {
+
+
     if (gMeme.selectedLineIdx === -1) return;
-    gMeme.lines[gMeme.selectedLineIdx].coord.x += ev.movementX;
-    gMeme.lines[gMeme.selectedLineIdx].coord.y += ev.movementY;
+    // init for the first movemenet
+    if (!gPrevMouseMoveEv) {
+        gPrevMouseMoveEv = {
+            x: ev.offsetX,
+            y: ev.offsetY
+        }
+    }
+
+    var movementX = ev.offsetX - gPrevMouseMoveEv.x;
+    var movementY = ev.offsetY - gPrevMouseMoveEv.y;
+
+    gMeme.lines[gMeme.selectedLineIdx].coord.x += movementX;
+    gMeme.lines[gMeme.selectedLineIdx].coord.y += movementY;
+
     var rectRegion = _getTextRectRegion(gMeme);
     gMeme['lines'][gMeme.selectedLineIdx].textRectRegion = rectRegion;
 
+    gPrevMouseMoveEv.x = ev.offsetX;
+    gPrevMouseMoveEv.y = ev.offsetY;
+
 }
+
+function updateTextColor(propToCahnge,color){
+    if (gMeme.selectedLineIdx === -1) return;
+    gMeme.lines[gMeme.selectedLineIdx][propToCahnge] = color;
+}
+
+// function findCommonKeywords(){
+
+// }

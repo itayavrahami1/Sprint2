@@ -34,8 +34,8 @@ html {
 
 .container {
     max-width: 1200px;
-    /* margin-left: auto;
-    margin-right: auto; */
+    margin-left: auto;
+    margin-right: auto;
     padding: 0 1.2rem;
 }
 
@@ -317,6 +317,12 @@ html {
 
 @media(max-width: 740px){
     /* SEARCHBAR */
+    .container {
+        max-width: 800px;
+        /* margin-left: auto;
+        margin-right: auto; */
+        padding: 0 1.2rem;
+    }
 
     .search-bar {
         flex-direction: column;
